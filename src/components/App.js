@@ -1,16 +1,19 @@
-import React, {useState} from 'react'
+import React from 'react'
+import {useSelector} from "react-redux";
 import SearchPanel from "./searchPanel";
 import ChartBar from "./ChartBar";
 
 function App() {
-  const [isShowChartBar, setIsShowChartBar] = useState(false);
+  const tempList = useSelector(state => state.tempList);
+  const errorMessage = useSelector(state => state.error);
 
   return (
     <div className="App">
       <SearchPanel/>
-      <span>city name</span>
-      {isShowChartBar &&
-      <ChartBar/>}
+      {errorMessage ?
+        'city is not found' :
+        tempList &&
+        <ChartBar/>}
     </div>
   );
 }
